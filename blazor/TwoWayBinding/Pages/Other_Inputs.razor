@@ -8,125 +8,232 @@
         <p class="typography__body-1 text">
             Check box
         </p>
-        <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" class="user-input_2" other_inputs-scope>
-            Label
-        </IgbCheckbox>
-        <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" class="user-input_2" other_inputs-scope>
-            Label
-        </IgbCheckbox>
+        <IgbCheckbox @bind-Checked="_checked">Label</IgbCheckbox>
+        <IgbCheckbox Checked="_checked" Change="@(e => _checked = e.Detail)">Label</IgbCheckbox>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Combo
         </p>
-        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Single select" ValueKey="CategoryID" DisplayKey="Description" SingleSelect="true" class="user-input" other_inputs-scope></IgbCombo>
-        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Single select" ValueKey="CategoryID" DisplayKey="Description" SingleSelect="true" class="user-input" other_inputs-scope></IgbCombo>
-        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Multi select" ValueKey="CategoryID" DisplayKey="Description" autoFocusSearch="true" DisableFiltering="true" class="user-input" other_inputs-scope></IgbCombo>
-        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Multi select" ValueKey="CategoryID" DisplayKey="Description" autoFocusSearch="true" DisableFiltering="true" class="user-input" other_inputs-scope></IgbCombo>
+        <IgbCombo Data="@_northwindCategories" Value="ComboWithValueKeyValue()" Change="ComboWithValueKeyChange"
+                  Label="Single with value key" ValueKey="CategoryID" DisplayKey="Description" SingleSelect="true"></IgbCombo>
+        <p>Category id is @_categoryId</p>
+
+        <IgbCombo Data="@_northwindCategories" Value="ComboNoValueKeyValue()" Change="ComboNoValueKeyChange"
+                  Label="Single no value key" DisplayKey="Description" SingleSelect="true"></IgbCombo>
+        <p>Category Name is @_category?.Name</p>
+
+        <IgbCombo Data="@_northwindCategories" Value="ComboWithValueKeysValue()" Change="ComboWithValueKeysChange"
+                  Label="Multi select with value key" ValueKey="CategoryID" DisplayKey="Description"></IgbCombo>
+        @foreach (var item in _categoryIds ?? new double[0])
+        {
+            <p>@item</p>
+        }
+
+        <IgbCombo Data="@_northwindCategories" Value="ComboNoValueKeysValue()" Change="ComboNoValueKeysChange"
+                  Label="Multi select no value key" DisplayKey="Description"></IgbCombo>
+        @foreach (var item in _categories ?? new CategoriesType[0])
+        {
+            <p>@item.Name</p>
+        }
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Date picker
         </p>
-        <IgbDatePicker Label="Date" @bind-Value="_value" class="date-picker" other_inputs-scope></IgbDatePicker>
-        <IgbDatePicker Label="Date" @bind-Value="_value" class="date-picker" other_inputs-scope></IgbDatePicker>
+        <IgbDatePicker Label="Date" @bind-Value="_date"></IgbDatePicker>
+        <IgbDatePicker Label="Date" Value="_date" ValueChanged="@(e => _date = e)"></IgbDatePicker>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Radio group
         </p>
-        <IgbRadioGroup Alignment="RadioGroupAlignment.Horizontal" class="user-input_2" other_inputs-scope>
-            <IgbRadio Value="1" class="radio" other_inputs-scope>
-                Label
-            </IgbRadio>
-            <IgbRadio Value="2" class="radio" other_inputs-scope>
-                Label
-            </IgbRadio>
-            <IgbRadio Value="3" class="radio" other_inputs-scope>
-                Label
-            </IgbRadio>
+        <IgbRadioGroup>
+            <IgbRadio Name="radio" Value="1" Change="RadioValueChange">Label</IgbRadio>
+            <IgbRadio Name="radio" Value="2" Change="RadioValueChange">Label</IgbRadio>
+            <IgbRadio Name="radio" Value="3" Change="RadioValueChange">Label</IgbRadio>
         </IgbRadioGroup>
-        <IgbRadioGroup Alignment="RadioGroupAlignment.Horizontal" class="user-input_2" other_inputs-scope>
-            <IgbRadio Value="1" class="radio" other_inputs-scope>
-                Label
-            </IgbRadio>
-            <IgbRadio Value="2" class="radio" other_inputs-scope>
-                Label
-            </IgbRadio>
-            <IgbRadio Value="3" class="radio" other_inputs-scope>
-                Label
-            </IgbRadio>
-        </IgbRadioGroup>
+        <p>Radio value is @_radioValue</p>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Rating
         </p>
-        <IgbRating Value="@_value1" Size="SizableComponentSize.Large" Change="@(e => _value1 = (double)e.Detail)" class="user-input_2" other_inputs-scope></IgbRating>
-        <IgbRating Value="@_value1" Size="SizableComponentSize.Large" Change="@(e => _value1 = (double)e.Detail)" class="user-input_2" other_inputs-scope></IgbRating>
+        <IgbRating @bind-Value="_rating"></IgbRating>
+        <IgbRating Value="_rating" Change="@(e => _rating = e.Detail)"></IgbRating>
+        <p>Rating is @_rating</p>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Select
         </p>
-        <IgbSelect Outlined="true" Label="Label/Placeholder" Value="@_value2" Change="@(e => _value2 = e.Detail.Value)" class="user-input" other_inputs-scope>
+        <IgbSelect Label="Label/Placeholder" @bind-Value="_select">
             @foreach (var item in _northwindCategories)
             {
-                <IgbSelectItem Value="@item.CategoryID.ToString()">
-                    @item.Name
-                </IgbSelectItem>
+                <IgbSelectItem Value="@item.CategoryID.ToString()">@item.Name</IgbSelectItem>
             }
         </IgbSelect>
-        <IgbSelect Outlined="true" Label="Label/Placeholder" Value="@_value2" Change="@(e => _value2 = e.Detail.Value)" class="user-input" other_inputs-scope>
+        <IgbSelect Label="Label/Placeholder" Value="_select" Change="SelectChange">
             @foreach (var item in _northwindCategories)
             {
-                <IgbSelectItem Value="@item.CategoryID.ToString()">
-                    @item.Name
-                </IgbSelectItem>
+                <IgbSelectItem Value="@item.CategoryID.ToString()">@item.Name</IgbSelectItem>
             }
         </IgbSelect>
+        <p>Select is @_select</p>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Slider
         </p>
-        <IgbSlider Value="@_value3" Min="0" Max="100" Step="10" DiscreteTrack="true" Change="@(e => _value3 = (double)e.Detail)" class="slider" other_inputs-scope></IgbSlider>
-        <IgbSlider Value="@_value3" Min="0" Max="100" Step="10" DiscreteTrack="true" Change="@(e => _value3 = (double)e.Detail)" class="slider" other_inputs-scope></IgbSlider>
-        <IgbRangeSlider Lower="20" Upper="80" Min="0" Max="100" Step="10" DiscreteTrack="true" class="range-slider" other_inputs-scope></IgbRangeSlider>
-        <IgbRangeSlider Lower="20" Upper="80" Min="0" Max="100" Step="10" DiscreteTrack="true" class="range-slider" other_inputs-scope></IgbRangeSlider>
+        <IgbSlider @bind-Value="_slider" class="slider" other_inputs-scope></IgbSlider>
+        <IgbSlider Value="@_slider" Change="@(e => _slider = e.Detail)" class="slider" other_inputs-scope></IgbSlider>
+        <p>Slider is @_slider</p>
+        <IgbRangeSlider Lower="_rangeSlider?.Lower ?? default" Upper="_rangeSlider?.Upper ?? default" Change=@(RangeSliderChange) class="range-slider" other_inputs-scope></IgbRangeSlider>
+        @* <IgbRangeSlider @bind-Lower="_rangeSlider.Lower" @bind-Upper="_rangeSlider.Upper" class="range-slider" other_inputs-scope></IgbRangeSlider> *@
+        <p>Range is @_rangeSlider?.Lower - @_rangeSlider?.Upper</p>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Switch
         </p>
-        <IgbSwitch class="user-input_2" other_inputs-scope>
-            Label
-        </IgbSwitch>
-        <IgbSwitch class="user-input_2" other_inputs-scope>
-            Label
-        </IgbSwitch>
+        <IgbSwitch @bind-Checked="_checked">Label</IgbSwitch>
+        <IgbSwitch Checked="_checked" Change="@(e => _checked = e.Detail)">Label</IgbSwitch>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Calendar
         </p>
         <div class="row-layout group_1">
-            <IgbCalendar @bind-Value="_value" HideHeader="false" class="calendar" other_inputs-scope></IgbCalendar>
-            <IgbCalendar @bind-Value="_value" HideHeader="false" class="calendar" other_inputs-scope></IgbCalendar>
+            <IgbCalendar @bind-Value="_date"></IgbCalendar>
+            <IgbCalendar Value="_date" Change="@(e => _date = (DateTime)e.Detail)"></IgbCalendar>
         </div>
     </div>
 </div>
 
 @code {
     private List<CategoriesType> _northwindCategories = new();
-    private DateTime _value = DateTime.Parse("2024-04-17T00:00");
-    private double _value1 = 3;
-    private string _value2 = "1";
-    private double _value3 = 60;
+    private bool _checked;
+    private DateTime _date;
+    private double? _categoryId;
+    private double[] _categoryIds;
+    private CategoriesType _category;
+    private CategoriesType[] _categories;
+    private string _radioValue;
+    private double _rating;
+    private string _select;
+    private double _slider;
+    private IgbRangeSliderValue _rangeSlider;
+    private IgbRangeSlider s;
 
     protected override async Task OnInitializedAsync()
     {
         _northwindCategories = await NorthwindService.GetCategories();
         await base.OnInitializedAsync();
+    }
+
+    protected object[] ComboNoValueKeyValue()
+    {
+        if (_category != null)
+        {
+            return new object[] { _category };
+        }
+
+        return Array.Empty<object>();
+    }
+
+    protected void ComboNoValueKeyChange(IgbComboChangeEventArgs e)
+    {
+        if (e.Detail.NewValue.Length != 0)
+        {
+            _category = (CategoriesType)e.Detail.NewValue.First();
+        }
+        else
+        {
+            _category = null;
+        }
+    }
+
+    protected object[] ComboWithValueKeyValue()
+    {
+        if (_categoryId != null)
+        {
+            return new object[] { _northwindCategories[(int)_categoryId] };
+        }
+
+        return Array.Empty<object>();
+    }
+
+    protected void ComboWithValueKeyChange(IgbComboChangeEventArgs e)
+    {
+        if (e.Detail.NewValue.Length != 0)
+        {
+            _categoryId = double.Parse(e.Detail.NewValue.First().ToString());
+        }
+        else
+        {
+            _categoryId = null;
+        }
+    }
+
+    protected object[] ComboNoValueKeysValue()
+    {
+        if (_categories != null)
+        {
+            return _categories.Cast<object>().ToArray();
+        }
+
+        return Array.Empty<object>();
+    }
+
+    protected void ComboNoValueKeysChange(IgbComboChangeEventArgs e)
+    {
+        if (e.Detail.NewValue.Length != 0)
+        {
+            _categories = e.Detail.NewValue.Cast<CategoriesType>().ToArray();
+        }
+        else
+        {
+            _categories = null;
+        }
+    }
+
+    protected object[] ComboWithValueKeysValue()
+    {
+        if (_categoryIds != null)
+        {
+            return _northwindCategories.Where(c => _categoryIds.Contains(c.CategoryID)).Cast<object>().ToArray();
+        }
+
+        return Array.Empty<object>();
+    }
+
+    protected void ComboWithValueKeysChange(IgbComboChangeEventArgs e)
+    {
+        if (e.Detail.NewValue.Length != 0)
+        {
+            _categoryIds = e.Detail.NewValue.Cast<double>().ToArray();
+        }
+        else
+        {
+            _categoryIds = null;
+        }
+    }
+
+    protected void RadioValueChange(IgbComponentBoolValueChangedEventArgs e)
+    {
+        if (e.Detail)
+        {
+            _radioValue = (e.Parent as IgbRadio).Value;
+        }
+    }
+
+    protected void SelectChange(IgbSelectItemComponentEventArgs e)
+    {
+        _select = e.Detail.Value;
+    }
+
+    protected void RangeSliderChange(IgbRangeSliderValueEventArgs e)
+    {
+        _rangeSlider = e.Detail;
     }
 }
