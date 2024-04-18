@@ -1,6 +1,6 @@
-import { html, css, LitElement } from 'lit';
+import { IgcCalendarComponent, IgcCheckboxComponent, IgcComboChangeEventArgs, IgcComboComponent, IgcRadioComponent, IgcRadioGroupComponent, IgcRangeSliderComponent, IgcRangeSliderValue, IgcRatingComponent, IgcSelectComponent, IgcSelectItemComponent, IgcSliderComponent, IgcSwitchComponent, defineComponents } from 'igniteui-webcomponents';
+import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { defineComponents, IgcCalendarComponent, IgcCheckboxComponent, IgcComboComponent, IgcRadioComponent, IgcRadioGroupComponent, IgcRangeSliderComponent, IgcRatingComponent, IgcSelectComponent, IgcSliderComponent, IgcSwitchComponent } from 'igniteui-webcomponents';
 import { CategoriesType } from '../models/Northwind/categories-type';
 import { northwindService } from '../services/Northwind-service';
 
@@ -17,10 +17,6 @@ export default class OtherInputs extends LitElement {
       align-items: flex-start;
       align-content: flex-start;
       gap: 20px;
-    }
-    .column-layout {
-      display: flex;
-      flex-direction: column;
     }
     .group {
       justify-content: flex-start;
@@ -46,39 +42,8 @@ export default class OtherInputs extends LitElement {
       height: max-content;
       min-width: min-content;
     }
-    .calendar {
-      width: max-content;
-      height: max-content;
-      min-width: max-content;
-      flex-grow: 1;
-      flex-basis: 0;
-    }
-    .range-slider {
-      width: 200px;
-      height: max-content;
-      min-width: 50px;
-      max-width: 200px;
-    }
-    .user-input_2 {
-      width: max-content;
-      height: max-content;
-    }
-    .user-input {
-      height: max-content;
-      min-width: min-content;
-    }
-    .date-picker {
-      height: max-content;
-      min-width: 120px;
-    }
-    .radio {
-      padding: 8px;
-    }
     .slider {
       width: 200px;
-      height: max-content;
-      min-width: 50px;
-      max-width: 200px;
     }
   `;
 
@@ -91,128 +56,107 @@ export default class OtherInputs extends LitElement {
   private northwindCategories: CategoriesType[] = [];
 
   @state()
-  private value: number = 3;
+  private checked: boolean | undefined;
 
   @state()
-  private value1: string = '1';
+  private categoryId: number | undefined;
 
   @state()
-  private value2: number = 60;
+  private category: CategoriesType | undefined;
 
   @state()
-  private value3: string = '2024-04-17T00:00';
+  private categoryIds: number[] = [];
+
+  @state()
+  private categories: CategoriesType[] = [];
+
+  @state()
+  private radio: number | undefined;
+
+  @state()
+  private rating: number | undefined;
+
+  @state()
+  private select: number | undefined;
+
+  @state()
+  private slider: number | undefined;
+
+  @state()
+  private range: IgcRangeSliderValue | undefined;
+
+  @state()
+  private date!: Date | null;
 
   render() {
     return html`
       <link rel='stylesheet' href='../../ig-theme.css'>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Check box
-        </p>
-        <igc-checkbox labelPosition="after" class="user-input_2">
-          Label
-        </igc-checkbox>
-        <igc-checkbox labelPosition="after" class="user-input_2">
-          Label
-        </igc-checkbox>
+        <p class="typography__body-1 text">Check box</p>
+        <igc-checkbox .checked=${this.checked ?? false} @igcChange="${(e: CustomEvent<boolean>) => this.checked = e.detail}">Label</igc-checkbox>
+        <p>Checked is ${this.checked}</p>
       </div>
       <div class="column-layout group">
         <p class="typography__body-1 text">
           Combo
         </p>
-        <igc-combo ?outlined="${true}" .data="${this.northwindCategories}" label="Single select" value-key="categoryID" display-key="description" ?single-select="${true}" class="user-input"></igc-combo>
-        <igc-combo ?outlined="${true}" .data="${this.northwindCategories}" label="Single select" value-key="categoryID" display-key="description" ?single-select="${true}" class="user-input"></igc-combo>
-        <igc-combo ?outlined="${true}" .data="${this.northwindCategories}" label="Multi select" value-key="categoryID" display-key="description" .autoFocusSearch="${true}" ?disable-filtering="${true}" class="user-input"></igc-combo>
-        <igc-combo ?outlined="${true}" .data="${this.northwindCategories}" label="Multi select" value-key="categoryID" display-key="description" .autoFocusSearch="${true}" ?disable-filtering="${true}" class="user-input"></igc-combo>
+        <igc-combo .value=${[this.categoryId]} @igcChange=${(e: CustomEvent<IgcComboChangeEventArgs>) => this.categoryId = e.detail.newValue[0]} .data="${this.northwindCategories}" label="Single with value key" value-key="categoryID" display-key="description" ?single-select="${true}"></igc-combo>
+        <p>CategoryId is ${this.categoryId}</p>
+        <igc-combo .value=${[this.category]} @igcChange=${(e: CustomEvent<IgcComboChangeEventArgs>) => this.category = e.detail.newValue[0]} .data="${this.northwindCategories}" label="Single no value key" display-key="description" ?single-select="${true}"></igc-combo>
+        <p>Category name is ${this.category?.name}</p>
+        <igc-combo .value=${this.categoryIds} @igcChange=${(e: CustomEvent<IgcComboChangeEventArgs>) => this.categoryIds = e.detail.newValue} .data="${this.northwindCategories}" label="Multi with key" value-key="categoryID" display-key="description" .autoFocusSearch="${true}" ?disable-filtering="${true}"></igc-combo>
+        ${this.categoryIds.map(item => html`
+          <p>Category Id -> ${item}</p>
+        `)}
+        <igc-combo .value=${this.categories} @igcChange=${(e: CustomEvent<IgcComboChangeEventArgs>) => this.categories = e.detail.newValue} .data="${this.northwindCategories}" label="Multi no key" display-key="description" .autoFocusSearch="${true}" ?disable-filtering="${true}"></igc-combo>
+        ${this.categories.map(item => html`
+          <p>Category name -> ${item.name}</p>
+        `)}
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Date picker
-        </p>
+        <p class="typography__body-1 text">Date picker</p>
         <span class="date-picker">DatePicker not yet available in WebComponents</span>
-        <span class="date-picker">DatePicker not yet available in WebComponents</span>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Radio group
-        </p>
-        <igc-radio-group alignment="horizontal" class="user-input_2">
-          <igc-radio value="1" class="radio">
-            Label
-          </igc-radio>
-          <igc-radio value="2" class="radio">
-            Label
-          </igc-radio>
-          <igc-radio value="3" class="radio">
-            Label
-          </igc-radio>
+        <p class="typography__body-1 text">Radio group</p>
+        <igc-radio-group>
+          <igc-radio name="radio" value="1" @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 1 : undefined}>Label</igc-radio>
+          <igc-radio name="radio" value="2" @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 2 : undefined}>Label</igc-radio>
+          <igc-radio name="radio" value="3" @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 3 : undefined}>Label</igc-radio>
         </igc-radio-group>
-        <igc-radio-group alignment="horizontal" class="user-input_2">
-          <igc-radio value="1" class="radio">
-            Label
-          </igc-radio>
-          <igc-radio value="2" class="radio">
-            Label
-          </igc-radio>
-          <igc-radio value="3" class="radio">
-            Label
-          </igc-radio>
-        </igc-radio-group>
+        <p>Radio is ${this.radio}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Rating
-        </p>
-        <igc-rating value="${this.value}" size="large" @igcChange="${(e: any) => this.value = e.detail}" class="user-input_2"></igc-rating>
-        <igc-rating value="${this.value}" size="large" @igcChange="${(e: any) => this.value = e.detail}" class="user-input_2"></igc-rating>
+        <p class="typography__body-1 text">Rating</p>
+        <igc-rating .value="${this.rating ?? 0}" @igcChange="${(e: CustomEvent<number>) => this.rating = e.detail}"></igc-rating>
+        <p>Rating is ${this.rating}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Select
-        </p>
-        <igc-select ?outlined="${true}" label="Label/Placeholder" value="${this.value1}" @igcChange="${(e: any) => this.value1 = e.detail.value}" class="user-input">
+        <p class="typography__body-1 text">Select</p>
+        <igc-select .value="${this.select?.toString() ?? ''}" @igcChange="${(e: CustomEvent<IgcSelectItemComponent>) => this.select = +e.detail.value}">
           ${this.northwindCategories?.map((item) => html`
-            <igc-select-item value="${item.categoryID}">
-              ${item.name}
-            </igc-select-item>
+            <igc-select-item .value=${item.categoryID.toString()}>${item.name}</igc-select-item>
           `)}
         </igc-select>
-        <igc-select ?outlined="${true}" label="Label/Placeholder" value="${this.value1}" @igcChange="${(e: any) => this.value1 = e.detail.value}" class="user-input">
-          ${this.northwindCategories?.map((item) => html`
-            <igc-select-item value="${item.categoryID}">
-              ${item.name}
-            </igc-select-item>
-          `)}
-        </igc-select>
+        <p>Select is ${this.select}</p>
       </div>
       <div class="column-layout group">
         <p class="typography__body-1 text">
           Slider
         </p>
-        <igc-slider value="${this.value2}" min="0" max="100" step="10" ?discrete-track="${true}" @igcChange="${(e: any) => this.value2 = e.detail}" class="slider"></igc-slider>
-        <igc-slider value="${this.value2}" min="0" max="100" step="10" ?discrete-track="${true}" @igcChange="${(e: any) => this.value2 = e.detail}" class="slider"></igc-slider>
-        <igc-range-slider .lower="20" .upper="80" .min="0" .max="100" .step="10" .discrete-track="true" class="range-slider"></igc-range-slider>
-        <igc-range-slider .lower="20" .upper="80" .min="0" .max="100" .step="10" .discrete-track="true" class="range-slider"></igc-range-slider>
+        <igc-slider .value="${this.slider ?? 0}" @igcChange="${(e: CustomEvent<number>) => this.slider = e.detail}" class="slider"></igc-slider>
+        <p>Slider is ${this.slider}</p>
+        <igc-range-slider .lower=${this.range?.lower ?? 0} .upper=${this.range?.upper ?? 0} @igcChange=${(e: CustomEvent<IgcRangeSliderValue>) => this.range = e.detail} class="slider"></igc-range-slider>
+        <p>Range is ${this.range?.lower} - ${this.range?.upper}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Switch
-        </p>
-        <igc-switch class="user-input_2">
-          Label
-        </igc-switch>
-        <igc-switch class="user-input_2">
-          Label
-        </igc-switch>
+        <p class="typography__body-1 text">Switch</p>
+        <igc-switch .checked=${this.checked ?? false} @igcChange=${(e: CustomEvent<boolean>) => this.checked = e.detail}>Label</igc-switch>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Calendar
-        </p>
-        <div class="row-layout group_1">
-          <igc-calendar value="${this.value3}" ?hide-header="${false}" header-orientation="horizontal" @igcChange="${(e: any) => this.value3 = e.detail}" class="calendar"></igc-calendar>
-          <igc-calendar value="${this.value3}" ?hide-header="${false}" header-orientation="horizontal" @igcChange="${(e: any) => this.value3 = e.detail}" class="calendar"></igc-calendar>
-        </div>
+        <p class="typography__body-1 text">Calendar</p>
+          <igc-calendar .value="${this.date}" @igcChange="${(e: CustomEvent<Date | null>) => this.date = e.detail}"></igc-calendar>
+          <p>Date is ${this.date?.toDateString()}</p>
       </div>
     `;
   }
