@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IGX_BUTTON_GROUP_DIRECTIVES, IGX_INPUT_GROUP_DIRECTIVES, IgxDateTimeEditorModule } from '@infragistics/igniteui-angular';
 
@@ -16,8 +16,6 @@ export class InputGroupComponent {
   public email: string | undefined;
   public password: string | undefined;
   public phone: string | undefined;
-
-  @Input()
   public date: Date | undefined;
 
   textInputChange = (e: Event) => {
