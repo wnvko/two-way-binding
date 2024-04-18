@@ -1,0 +1,30 @@
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+.group {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 20px;
+  position: relative;
+  padding: 20px;
+  min-width: 50px;
+  min-height: 50px;
+}
+.text {
+  text-align: center;
+  height: max-content;
+  min-width: min-content;
+}
+.user-input {
+  height: max-content;
+  min-width: min-content;
+}

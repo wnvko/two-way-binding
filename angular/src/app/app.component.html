@@ -1,0 +1,15 @@
+<div class="row-layout group">
+  <igx-nav-drawer [isOpen]="true" [pin]="true" [pinThreshold]="1024" width="320px" class="nav-drawer">
+    <ng-template igxDrawer>
+      <div igxDrawerItem igxRipple routerLink="/input-group">
+        <span>Input group</span>
+      </div>
+      <div igxDrawerItem igxRipple routerLink="/other-inputs">
+        <span>Other inputs</span>
+      </div>
+    </ng-template>
+  </igx-nav-drawer>
+  <div class="view-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

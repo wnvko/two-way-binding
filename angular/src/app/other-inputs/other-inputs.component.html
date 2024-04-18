@@ -1,0 +1,119 @@
+<div class="column-layout group">
+  <p class="text">
+    Check box
+  </p>
+  <igx-checkbox labelPosition="after" class="user-input_2">
+    Label
+  </igx-checkbox>
+  <igx-checkbox labelPosition="after" class="user-input_2">
+    Label
+  </igx-checkbox>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Combo
+  </p>
+  <igx-simple-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" class="user-input">
+    <label igxLabel>Single select</label>
+  </igx-simple-combo>
+  <igx-simple-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" class="user-input">
+    <label igxLabel>Single select</label>
+  </igx-simple-combo>
+  <igx-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" [autoFocusSearch]="true" class="user-input">
+    <label igxLabel>Multi select</label>
+  </igx-combo>
+  <igx-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" [autoFocusSearch]="true" class="user-input">
+    <label igxLabel>Multi select</label>
+  </igx-combo>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Date picker
+  </p>
+  <igx-date-picker [(ngModel)]="value" type="border" mode="dialog" class="date-picker">
+    <label igxLabel>Date</label>
+  </igx-date-picker>
+  <igx-date-picker [(ngModel)]="value" type="border" mode="dialog" class="date-picker">
+    <label igxLabel>Date</label>
+  </igx-date-picker>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Radio group
+  </p>
+  <igx-radio-group [(ngModel)]="value1" class="user-input_2">
+    <igx-radio value="1" class="radio">
+      Label
+    </igx-radio>
+    <igx-radio value="2" class="radio">
+      Label
+    </igx-radio>
+    <igx-radio value="3" class="radio">
+      Label
+    </igx-radio>
+  </igx-radio-group>
+  <igx-radio-group [(ngModel)]="value1" class="user-input_2">
+    <igx-radio value="1" class="radio">
+      Label
+    </igx-radio>
+    <igx-radio value="2" class="radio">
+      Label
+    </igx-radio>
+    <igx-radio value="3" class="radio">
+      Label
+    </igx-radio>
+  </igx-radio-group>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Rating
+  </p>
+  <igc-rating [(ngModel)]="value2" size="large" class="user-input_2"></igc-rating>
+  <igc-rating [(ngModel)]="value2" size="large" class="user-input_2"></igc-rating>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Select
+  </p>
+  <igx-select type="border" [(ngModel)]="value1" class="user-input">
+    <igx-select-item [value]="item.categoryID" *ngFor="let item of northwindCategories">
+      {{ item.name }}
+    </igx-select-item>
+    <label igxLabel>Label/Placeholder</label>
+  </igx-select>
+  <igx-select type="border" [(ngModel)]="value1" class="user-input">
+    <igx-select-item [value]="item.categoryID" *ngFor="let item of northwindCategories">
+      {{ item.name }}
+    </igx-select-item>
+    <label igxLabel>Label/Placeholder</label>
+  </igx-select>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Slider
+  </p>
+  <igx-slider [(ngModel)]="value3" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
+  <igx-slider [(ngModel)]="value3" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
+  <igx-slider type="range" [(ngModel)]="value4" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
+  <igx-slider type="range" [(ngModel)]="value4" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Switch
+  </p>
+  <igx-switch class="user-input_2">
+    Label
+  </igx-switch>
+  <igx-switch class="user-input_2">
+    Label
+  </igx-switch>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Calendar
+  </p>
+  <div class="row-layout group_1">
+    <igx-calendar [(ngModel)]="value" [hasHeader]="true" [vertical]="false" class="calendar"></igx-calendar>
+    <igx-calendar [(ngModel)]="value" [hasHeader]="true" [vertical]="false" class="calendar"></igx-calendar>
+  </div>
+</div>

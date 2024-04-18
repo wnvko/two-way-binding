@@ -1,0 +1,78 @@
+<div class="column-layout group">
+  <p class="text">
+    Type Text
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <input type="text" [(ngModel)]="value" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Text</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input type="text" [(ngModel)]="value" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Text</label>
+  </igx-input-group>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Type Numeric
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <input type="number" [(ngModel)]="value1" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Numeric</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input type="number" [(ngModel)]="value1" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Numeric</label>
+  </igx-input-group>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Type Email
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <input type="email" [(ngModel)]="value2" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Email</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input type="email" [(ngModel)]="value2" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Email</label>
+  </igx-input-group>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Type Password
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <input type="password" [(ngModel)]="value3" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Password</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input type="password" [(ngModel)]="value3" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Password</label>
+  </igx-input-group>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Type Phone
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <input type="tel" [(ngModel)]="value4" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Phone</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input type="tel" [(ngModel)]="value4" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>Phone</label>
+  </igx-input-group>
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Type Date
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <label igxLabel for="inputField">Date</label>
+    <input name="inputField" [required]="false" [disabled]="false" igxInput igxDateTimeEditor="yyyy/MM/dd" displayFormat="shortDate" [spinLoop]="true" [(ngModel)]="date" />
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <label igxLabel for="inputField">Date</label>
+    <input name="inputField" [required]="false" [disabled]="false" igxInput igxDateTimeEditor="yyyy/MM/dd" displayFormat="shortDate" [spinLoop]="true" [(ngModel)]="date" />
+  </igx-input-group>
+</div>
