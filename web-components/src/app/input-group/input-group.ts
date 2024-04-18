@@ -28,83 +28,58 @@ export default class InputGroup extends LitElement {
       min-width: 50px;
       min-height: 50px;
     }
-    .text {
-      text-align: center;
-      height: max-content;
-      min-width: min-content;
-    }
-    .date-time-input {
-      height: max-content;
-      min-width: min-content;
-    }
-    .input {
-      height: max-content;
-      min-width: min-content;
-    }
   `;
 
   @state()
-  private value: string = 'Text';
+  private text: string | undefined;
 
   @state()
-  private value1: number = 500;
+  private numeric: number | undefined;
 
   @state()
-  private value2: string = 'test@test.dev';
+  private email: string | undefined;
 
   @state()
-  private value3: string = 'Password';
+  private password: string | undefined;
 
   @state()
-  private value4: string = 'Phone';
+  private phone: string | undefined;
 
   @state()
-  private value5: Date = new Date('2010-10-10T00:00');
+  private date!: Date | null;
 
   render() {
     return html`
       <link rel='stylesheet' href='../../ig-theme.css'>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Type Text
-        </p>
-        <igc-input value="${this.value}" label="Text" ?outlined="${true}" @igcChange="${(e: any) => this.value = e.detail}" class="input"></igc-input>
-        <igc-input value="${this.value}" label="Text" ?outlined="${true}" @igcChange="${(e: any) => this.value = e.detail}" class="input"></igc-input>
+        <p class="typography__body-1 text">Type Text</p>
+        <igc-input value="${this.text ?? ''}" @igcChange="${(e: CustomEvent<string>) => this.text = e.detail}"></igc-input>
+        <p>Text is ${this.text}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Type Numeric
-        </p>
-        <igc-input type="number" value="${this.value1}" label="Numeric" ?outlined="${true}" @igcChange="${(e: any) => this.value1 = e.detail}" class="input"></igc-input>
-        <igc-input type="number" value="${this.value1}" label="Numeric" ?outlined="${true}" @igcChange="${(e: any) => this.value1 = e.detail}" class="input"></igc-input>
+        <p class="typography__body-1 text">Type Numeric</p>
+        <igc-input type="number" value="${this.numeric ?? 0}" @igcChange="${(e: CustomEvent<number>) => this.numeric = e.detail}"></igc-input>
+        <p>Number is ${this.numeric}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Type Email
-        </p>
-        <igc-input type="email" value="${this.value2}" label="Email" ?outlined="${true}" @igcChange="${(e: any) => this.value2 = e.detail}" class="input"></igc-input>
-        <igc-input type="email" value="${this.value2}" label="Email" ?outlined="${true}" @igcChange="${(e: any) => this.value2 = e.detail}" class="input"></igc-input>
+        <p class="typography__body-1 text">Type Email</p>
+        <igc-input type="email" value="${this.email ?? ''}" @igcChange="${(e: CustomEvent<string>) => this.email = e.detail}"></igc-input>
+        <p>Email is ${this.email}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Type Password
-        </p>
-        <igc-input type="password" value="${this.value3}" label="Password" ?outlined="${true}" @igcChange="${(e: any) => this.value3 = e.detail}" class="input"></igc-input>
-        <igc-input type="password" value="${this.value3}" label="Password" ?outlined="${true}" @igcChange="${(e: any) => this.value3 = e.detail}" class="input"></igc-input>
+        <p class="typography__body-1 text">Type Password</p>
+        <igc-input type="password" value="${this.password ?? ''}" @igcChange="${(e: CustomEvent<string>) => this.password = e.detail}"></igc-input>
+        <p>Password is ${this.password}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Type Phone
-        </p>
-        <igc-input type="tel" value="${this.value4}" label="Phone" ?outlined="${true}" @igcChange="${(e: any) => this.value4 = e.detail}" class="input"></igc-input>
-        <igc-input type="tel" value="${this.value4}" label="Phone" ?outlined="${true}" @igcChange="${(e: any) => this.value4 = e.detail}" class="input"></igc-input>
+        <p class="typography__body-1 text">Type Phone</p>
+        <igc-input type="tel" value="${this.phone ?? ''}" @igcChange="${(e: CustomEvent<string>) => this.phone = e.detail}"></igc-input>
+        <p>Phone is ${this.phone}</p>
       </div>
       <div class="column-layout group">
-        <p class="typography__body-1 text">
-          Type Date
-        </p>
-        <igc-date-time-input .value="${this.value5}" label="Date" ?outlined="${true}" @igcChange="${(e: any) => this.value5 = e.detail}" class="date-time-input"></igc-date-time-input>
-        <igc-date-time-input .value="${this.value5}" label="Date" ?outlined="${true}" @igcChange="${(e: any) => this.value5 = e.detail}" class="date-time-input"></igc-date-time-input>
+        <p class="typography__body-1 text">Type Date</p>
+        <igc-date-time-input .value="${this.date}" @igcChange="${(e: CustomEvent<Date | null>) => this.date = e.detail}" class="date-time-input"></igc-date-time-input>
+        <p>Date is ${this.date?.toDateString()}</p>
       </div>
     `;
   }
