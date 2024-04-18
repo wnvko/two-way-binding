@@ -1,0 +1,132 @@
+@page "/other_inputs"
+@using Northwind
+@using Models.Northwind
+@inject INorthwindService NorthwindService
+
+<div class="row-layout other-inputs-container">
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Check box
+        </p>
+        <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" class="user-input_2" other_inputs-scope>
+            Label
+        </IgbCheckbox>
+        <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" class="user-input_2" other_inputs-scope>
+            Label
+        </IgbCheckbox>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Combo
+        </p>
+        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Single select" ValueKey="CategoryID" DisplayKey="Description" SingleSelect="true" class="user-input" other_inputs-scope></IgbCombo>
+        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Single select" ValueKey="CategoryID" DisplayKey="Description" SingleSelect="true" class="user-input" other_inputs-scope></IgbCombo>
+        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Multi select" ValueKey="CategoryID" DisplayKey="Description" autoFocusSearch="true" DisableFiltering="true" class="user-input" other_inputs-scope></IgbCombo>
+        <IgbCombo Outlined="true" Data="@_northwindCategories" Label="Multi select" ValueKey="CategoryID" DisplayKey="Description" autoFocusSearch="true" DisableFiltering="true" class="user-input" other_inputs-scope></IgbCombo>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Date picker
+        </p>
+        <IgbDatePicker Label="Date" @bind-Value="_value" class="date-picker" other_inputs-scope></IgbDatePicker>
+        <IgbDatePicker Label="Date" @bind-Value="_value" class="date-picker" other_inputs-scope></IgbDatePicker>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Radio group
+        </p>
+        <IgbRadioGroup Alignment="RadioGroupAlignment.Horizontal" class="user-input_2" other_inputs-scope>
+            <IgbRadio Value="1" class="radio" other_inputs-scope>
+                Label
+            </IgbRadio>
+            <IgbRadio Value="2" class="radio" other_inputs-scope>
+                Label
+            </IgbRadio>
+            <IgbRadio Value="3" class="radio" other_inputs-scope>
+                Label
+            </IgbRadio>
+        </IgbRadioGroup>
+        <IgbRadioGroup Alignment="RadioGroupAlignment.Horizontal" class="user-input_2" other_inputs-scope>
+            <IgbRadio Value="1" class="radio" other_inputs-scope>
+                Label
+            </IgbRadio>
+            <IgbRadio Value="2" class="radio" other_inputs-scope>
+                Label
+            </IgbRadio>
+            <IgbRadio Value="3" class="radio" other_inputs-scope>
+                Label
+            </IgbRadio>
+        </IgbRadioGroup>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Rating
+        </p>
+        <IgbRating Value="@_value1" Size="SizableComponentSize.Large" Change="@(e => _value1 = (double)e.Detail)" class="user-input_2" other_inputs-scope></IgbRating>
+        <IgbRating Value="@_value1" Size="SizableComponentSize.Large" Change="@(e => _value1 = (double)e.Detail)" class="user-input_2" other_inputs-scope></IgbRating>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Select
+        </p>
+        <IgbSelect Outlined="true" Label="Label/Placeholder" Value="@_value2" Change="@(e => _value2 = e.Detail.Value)" class="user-input" other_inputs-scope>
+            @foreach (var item in _northwindCategories)
+            {
+                <IgbSelectItem Value="@item.CategoryID.ToString()">
+                    @item.Name
+                </IgbSelectItem>
+            }
+        </IgbSelect>
+        <IgbSelect Outlined="true" Label="Label/Placeholder" Value="@_value2" Change="@(e => _value2 = e.Detail.Value)" class="user-input" other_inputs-scope>
+            @foreach (var item in _northwindCategories)
+            {
+                <IgbSelectItem Value="@item.CategoryID.ToString()">
+                    @item.Name
+                </IgbSelectItem>
+            }
+        </IgbSelect>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Slider
+        </p>
+        <IgbSlider Value="@_value3" Min="0" Max="100" Step="10" DiscreteTrack="true" Change="@(e => _value3 = (double)e.Detail)" class="slider" other_inputs-scope></IgbSlider>
+        <IgbSlider Value="@_value3" Min="0" Max="100" Step="10" DiscreteTrack="true" Change="@(e => _value3 = (double)e.Detail)" class="slider" other_inputs-scope></IgbSlider>
+        <IgbRangeSlider Lower="20" Upper="80" Min="0" Max="100" Step="10" DiscreteTrack="true" class="range-slider" other_inputs-scope></IgbRangeSlider>
+        <IgbRangeSlider Lower="20" Upper="80" Min="0" Max="100" Step="10" DiscreteTrack="true" class="range-slider" other_inputs-scope></IgbRangeSlider>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Switch
+        </p>
+        <IgbSwitch class="user-input_2" other_inputs-scope>
+            Label
+        </IgbSwitch>
+        <IgbSwitch class="user-input_2" other_inputs-scope>
+            Label
+        </IgbSwitch>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Calendar
+        </p>
+        <div class="row-layout group_1">
+            <IgbCalendar @bind-Value="_value" HideHeader="false" class="calendar" other_inputs-scope></IgbCalendar>
+            <IgbCalendar @bind-Value="_value" HideHeader="false" class="calendar" other_inputs-scope></IgbCalendar>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<CategoriesType> _northwindCategories = new();
+    private DateTime _value = DateTime.Parse("2024-04-17T00:00");
+    private double _value1 = 3;
+    private string _value2 = "1";
+    private double _value3 = 60;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _northwindCategories = await NorthwindService.GetCategories();
+        await base.OnInitializedAsync();
+    }
+}

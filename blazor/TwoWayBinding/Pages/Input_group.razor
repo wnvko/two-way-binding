@@ -1,0 +1,56 @@
+@page "/"
+@page "/input_group"
+
+<div class="row-layout input-group-container">
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Text
+        </p>
+        <IgbInput @bind-Value="@_text" Label="Text" input_group-scope></IgbInput>
+        <IgbInput Value="@_text" Label="Text" Change="@(e => _text = e.Detail)" input_group-scope></IgbInput>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Numeric
+        </p>
+        <IgbInput DisplayType="InputType.Number" Value="@_value1.ToString()" Label="Numeric" Change="@(e => _value1 = double.Parse(e.Detail))" input_group-scope></IgbInput>
+        <IgbInput DisplayType="InputType.Number" Value="@_value1.ToString()" Label="Numeric" Change="@(e => _value1 = double.Parse(e.Detail))" input_group-scope></IgbInput>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Email
+        </p>
+        <IgbInput DisplayType="InputType.Email" Value="@_value2" Label="Email" Change="@(e => _value2 = e.Detail)" input_group-scope></IgbInput>
+        <IgbInput DisplayType="InputType.Email" Value="@_value2" Label="Email" Change="@(e => _value2 = e.Detail)" input_group-scope></IgbInput>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Password
+        </p>
+        <IgbInput DisplayType="InputType.Password" Value="@_value3" Label="Password" Change="@(e => _value3 = e.Detail)" input_group-scope></IgbInput>
+        <IgbInput DisplayType="InputType.Password" Value="@_value3" Label="Password" Change="@(e => _value3 = e.Detail)" input_group-scope></IgbInput>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Phone
+        </p>
+        <IgbInput DisplayType="InputType.Tel" Value="@_value4" Label="Phone" Change="@(e => _value4 = e.Detail)" input_group-scope></IgbInput>
+        <IgbInput DisplayType="InputType.Tel" Value="@_value4" Label="Phone" Change="@(e => _value4 = e.Detail)" input_group-scope></IgbInput>
+    </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Date
+        </p>
+        <IgbDatePicker @bind-Value="_value5" Label="Date" input_group-scope></IgbDatePicker>
+        <IgbDatePicker @bind-Value="_value5" Label="Date" input_group-scope></IgbDatePicker>
+    </div>
+</div>
+
+@code {
+    private string _text;
+    private double _value1 = 500;
+    private string _value2 = "test@test.dev";
+    private string _value3 = "Password";
+    private string _value4 = "Phone";
+    private DateTime _value5 = DateTime.Parse("2010-10-10T00:00");
+}
