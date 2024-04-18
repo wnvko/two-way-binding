@@ -2,27 +2,35 @@
   <p class="text">
     Check box
   </p>
-  <igx-checkbox labelPosition="after" class="user-input_2">
-    Label
-  </igx-checkbox>
-  <igx-checkbox labelPosition="after" class="user-input_2">
-    Label
-  </igx-checkbox>
+  <igx-checkbox [(ngModel)]="checked" [ngModelOptions]="{updateOn: 'blur'}">With blur</igx-checkbox>
+  <igx-checkbox [(ngModel)]="checked">No blur</igx-checkbox>
+  <igx-checkbox [value]="checked" (change)="checkboxChange($event)">Not update on property update</igx-checkbox>
+  <p>Checked is {{checked}}</p>
 </div>
 <div class="column-layout group">
   <p class="text">
     Combo
   </p>
-  <igx-simple-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" class="user-input">
+  <igx-simple-combo [data]="northwindCategories" valueKey="categoryID" displayKey="name" [(ngModel)]="categoryId"
+    [ngModelOptions]="{updateOn: 'blur'}">
+    <label igxLabel>Single select with blur</label>
+  </igx-simple-combo>
+  <igx-simple-combo [data]="northwindCategories" valueKey="categoryID" displayKey="name" [(ngModel)]="categoryId">
+    <label igxLabel>Single select no blur</label>
+  </igx-simple-combo>
+  <igx-simple-combo [data]="northwindCategories" valueKey="categoryID" displayKey="name" [ngModel]="categoryId"
+    (selectionChanging)="simpleComboSelectionChanging($event)">
     <label igxLabel>Single select</label>
   </igx-simple-combo>
-  <igx-simple-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" class="user-input">
-    <label igxLabel>Single select</label>
-  </igx-simple-combo>
-  <igx-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" [autoFocusSearch]="true" class="user-input">
-    <label igxLabel>Multi select</label>
+  <igx-combo [data]="northwindCategories" valueKey="categoryID" displayKey="name" [(ngModel)]="categoriesIds"
+    [ngModelOptions]="{updateOn: 'blur'}">
+    <label igxLabel>Multi select with blur</label>
   </igx-combo>
-  <igx-combo type="border" [data]="northwindCategories" valueKey="categoryID" displayKey="description" [autoFocusSearch]="true" class="user-input">
+  <igx-combo [data]="northwindCategories" valueKey="categoryID" displayKey="name" [(ngModel)]="categoriesIds">
+    <label igxLabel>Multi select no blur</label>
+  </igx-combo>
+  <igx-combo [data]="northwindCategories" valueKey="categoryID" displayKey="name" [ngModel]="categoriesIds"
+    (selectionChanging)="comboSelectionChanging($event)">
     <label igxLabel>Multi select</label>
   </igx-combo>
 </div>
@@ -30,10 +38,13 @@
   <p class="text">
     Date picker
   </p>
-  <igx-date-picker [(ngModel)]="value" type="border" mode="dialog" class="date-picker">
-    <label igxLabel>Date</label>
+  <igx-date-picker [(ngModel)]="date" [ngModelOptions]="{updateOn: 'blur'}">
+    <label igxLabel>Date with blur</label>
   </igx-date-picker>
-  <igx-date-picker [(ngModel)]="value" type="border" mode="dialog" class="date-picker">
+  <igx-date-picker [(ngModel)]="date">
+    <label igxLabel>Date no blur</label>
+  </igx-date-picker>
+  <igx-date-picker [value]="date ?? ''" (valueChange)="datePickerValueChange($event)">
     <label igxLabel>Date</label>
   </igx-date-picker>
 </div>
@@ -41,25 +52,36 @@
   <p class="text">
     Radio group
   </p>
-  <igx-radio-group [(ngModel)]="value1" class="user-input_2">
-    <igx-radio value="1" class="radio">
-      Label
+  <igx-radio-group [(ngModel)]="radioGroupValue" [ngModelOptions]="{updateOn: 'blur'}">
+    <igx-radio value="1">
+      With
     </igx-radio>
-    <igx-radio value="2" class="radio">
-      Label
+    <igx-radio value="2">
+      Blur
     </igx-radio>
-    <igx-radio value="3" class="radio">
-      Label
+    <igx-radio value="3">
+      Set
     </igx-radio>
   </igx-radio-group>
-  <igx-radio-group [(ngModel)]="value1" class="user-input_2">
-    <igx-radio value="1" class="radio">
+  <igx-radio-group [(ngModel)]="radioGroupValue">
+    <igx-radio value="1">
+      No
+    </igx-radio>
+    <igx-radio value="2">
+      Blur
+    </igx-radio>
+    <igx-radio value="3">
+      Set
+    </igx-radio>
+  </igx-radio-group>
+  <igx-radio-group [value]="radioGroupValue" (change)="radioGroupChange($event)">
+    <igx-radio value="1">
       Label
     </igx-radio>
-    <igx-radio value="2" class="radio">
+    <igx-radio value="2">
       Label
     </igx-radio>
-    <igx-radio value="3" class="radio">
+    <igx-radio value="3">
       Label
     </igx-radio>
   </igx-radio-group>
@@ -68,52 +90,70 @@
   <p class="text">
     Rating
   </p>
-  <igc-rating [(ngModel)]="value2" size="large" class="user-input_2"></igc-rating>
-  <igc-rating [(ngModel)]="value2" size="large" class="user-input_2"></igc-rating>
+  <div><igc-rating [(ngModel)]="ratingValue" [ngModelOptions]="{updateOn: 'blur'}"></igc-rating><span>with blur</span>
+  </div>
+  <div><igc-rating [(ngModel)]="ratingValue"></igc-rating><span>no blur</span>
+  </div>
+  <igc-rating [ngModel]="ratingValue" (igcChange)="ratingChange($event)"></igc-rating>
 </div>
 <div class="column-layout group">
   <p class="text">
     Select
   </p>
-  <igx-select type="border" [(ngModel)]="value1" class="user-input">
+  <igx-select [(ngModel)]="categoryId" [ngModelOptions]="{updateOn: 'blur'}">
     <igx-select-item [value]="item.categoryID" *ngFor="let item of northwindCategories">
       {{ item.name }}
     </igx-select-item>
-    <label igxLabel>Label/Placeholder</label>
+    <label igxLabel>With blur</label>
   </igx-select>
-  <igx-select type="border" [(ngModel)]="value1" class="user-input">
+  <igx-select [(ngModel)]="categoryId">
     <igx-select-item [value]="item.categoryID" *ngFor="let item of northwindCategories">
       {{ item.name }}
     </igx-select-item>
-    <label igxLabel>Label/Placeholder</label>
+    <label igxLabel>No blur</label>
+  </igx-select>
+  <igx-select [value]="radioGroupValue" (selectionChanging)="selectSelectionChanging($event)">
+    <igx-select-item [value]="item.categoryID" *ngFor="let item of northwindCategories">
+      {{ item.name }}
+    </igx-select-item>
+    <label igxLabel>Not update on variable change</label>
   </igx-select>
 </div>
 <div class="column-layout group">
   <p class="text">
     Slider
   </p>
-  <igx-slider [(ngModel)]="value3" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
-  <igx-slider [(ngModel)]="value3" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
-  <igx-slider type="range" [(ngModel)]="value4" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
-  <igx-slider type="range" [(ngModel)]="value4" [minValue]="0" [maxValue]="100" [step]="10" [secondaryTickLabels]="false" class="slider"></igx-slider>
+  <p>Update on blur does not work on slider</p>
+  <igx-slider [(ngModel)]="sliderValue" class="slider" [ngModelOptions]="{updateOn: 'blur'}"></igx-slider>
+  <igx-slider [(ngModel)]="sliderValue" class="slider"></igx-slider>
+  <igx-slider [value]="sliderValue" (valueChange)="sliderValueChange($event)" class="slider"></igx-slider>
+  <igx-slider type="range" [(ngModel)]="rangeSliderValue" class="slider"
+    [ngModelOptions]="{updateOn: 'blur'}"></igx-slider>
+  <igx-slider type="range" [(ngModel)]="rangeSliderValue" class="slider"></igx-slider>
+  <igx-slider type="range" [value]="rangeSliderValue" (valueChange)="rangeSliderValueChange($event)"
+    class="slider"></igx-slider>
 </div>
 <div class="column-layout group">
   <p class="text">
     Switch
   </p>
-  <igx-switch class="user-input_2">
-    Label
-  </igx-switch>
-  <igx-switch class="user-input_2">
-    Label
-  </igx-switch>
+  <igx-switch [(ngModel)]="checked" [ngModelOptions]="{updateOn: 'blur'}">With blur</igx-switch>
+  <igx-switch [(ngModel)]="checked">No blur</igx-switch>
+  <igx-switch [value]="checked" (change)="switchChange($event)">Not update on property update</igx-switch>
 </div>
 <div class="column-layout group">
   <p class="text">
     Calendar
   </p>
   <div class="row-layout group_1">
-    <igx-calendar [(ngModel)]="value" [hasHeader]="true" [vertical]="false" class="calendar"></igx-calendar>
-    <igx-calendar [(ngModel)]="value" [hasHeader]="true" [vertical]="false" class="calendar"></igx-calendar>
+    <div>
+      <igx-calendar [(ngModel)]="date"></igx-calendar>
+      <p>No blur</p>
+    </div>
+    <div>
+      <igx-calendar [(ngModel)]="date" [ngModelOptions]="{updateOn: 'blur'}"></igx-calendar>
+      <p>With blur - does not update date</p>
+    </div>
+    <igx-calendar [value]="date" (selected)="calendarViewDateChange($event)"></igx-calendar>
   </div>
 </div>
