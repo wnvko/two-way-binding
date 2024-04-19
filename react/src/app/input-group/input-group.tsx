@@ -1,39 +1,57 @@
-import { IgrDateTimeInput, IgrDateTimeInputModule, IgrInput, IgrInputModule } from '@infragistics/igniteui-react';
+import { IgrComponentDateValueChangedEventArgs, IgrComponentValueChangedEventArgs, IgrDateTimeInput, IgrDateTimeInputModule, IgrInput, IgrInputModule } from '@infragistics/igniteui-react';
 import createClassTransformer from '../style-utils';
 import styles from './input-group.module.css';
+import { useState } from 'react';
 
 IgrDateTimeInputModule.register();
 IgrInputModule.register();
 
 export default function InputGroup() {
   const classes = createClassTransformer(styles);
+  const [text, setText] = useState<string | undefined>()
+  const [numeric, setNumeric] = useState<number | undefined>()
+  const [email, setEmail] = useState<string | undefined>()
+  const [password, setPassword] = useState<string | undefined>()
+  const [phone, setPhone] = useState<string | undefined>()
+  const [date, setDate] = useState<Date | undefined>()
 
   return (
     <>
       <div className={classes("row-layout input-group-container")}>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Type Text</p>
-          <IgrInput value="Text" label="Text" className={classes("input")}></IgrInput>
+          <IgrInput value={text} change={(_s: IgrInput, e: IgrComponentValueChangedEventArgs) => setText(e.detail)}
+            label="Text"></IgrInput>
+          <p>Text is {text}</p>
         </div>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Type Numeric</p>
-          <IgrInput type="number" value="500" label="Numeric" className={classes("input")}></IgrInput>
+          <IgrInput value={numeric?.toString()} change={(_s: IgrInput, e: IgrComponentValueChangedEventArgs) => setNumeric(+e.detail)}
+            type="number" label="Numeric"></IgrInput>
+          <p>Numeric is {numeric}</p>
         </div>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Type Email</p>
-          <IgrInput type="email" value="test@test.dev" label="Email" className={classes("input")}></IgrInput>
+          <IgrInput value={email} change={(_s: IgrInput, e: IgrComponentValueChangedEventArgs) => setEmail(e.detail)}
+            type="email" label="Email"></IgrInput>
+          <p>Email is {email}</p>
         </div>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Type Password</p>
-          <IgrInput type="password" value="Password" label="Password" className={classes("input")}></IgrInput>
+          <IgrInput value={password} change={(_s: IgrInput, e: IgrComponentValueChangedEventArgs) => setPassword(e.detail)}
+            type="password" label="Password"></IgrInput>
+          <p>Password is {password}</p>
         </div>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Type Phone</p>
-          <IgrInput type="tel" value="Phone" label="Phone" className={classes("input")}></IgrInput>
+          <IgrInput value={phone} change={(_s: IgrInput, e: IgrComponentValueChangedEventArgs) => setPhone(e.detail)}
+            type="tel" label="Phone"></IgrInput>
+          <p>Phone is {phone}</p>
         </div>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Type Date</p>
-          <IgrDateTimeInput label="Date" className={classes("date-time-input")}></IgrDateTimeInput>
+          <IgrDateTimeInput value={date} change={(_s: IgrDateTimeInput, e: IgrComponentDateValueChangedEventArgs) => setDate(e.detail)} label="Date"></IgrDateTimeInput>
+          <p>Date is {date?.toDateString()}</p>
         </div>
       </div>
     </>
