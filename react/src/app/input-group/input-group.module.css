@@ -1,0 +1,24 @@
+.row-layout {
+  display: flex;
+}
+.input-group-container {
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: flex-start;
+  height: 100%;
+}
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+.group {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 20px;
+  position: relative;
+  padding: 20px;
+}
+.text {
+  text-align: center;
+}

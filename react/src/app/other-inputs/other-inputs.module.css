@@ -1,0 +1,31 @@
+.row-layout {
+  display: flex;
+}
+.other-inputs-container {
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 20px;
+  height: 100%;
+}
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+.group {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 20px;
+  position: relative;
+  padding: 20px;
+}
+.text {
+  text-align: center;
+  height: max-content;
+  min-width: min-content;
+}
+.slider {
+  width: 200px;
+}
