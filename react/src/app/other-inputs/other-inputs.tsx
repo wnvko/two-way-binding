@@ -1,13 +1,10 @@
 import {
-  IIgrCheckboxBaseProps,
   IgrCalendar,
   IgrCalendarModule,
   IgrCheckbox,
-  IgrCheckboxBase,
   IgrCheckboxModule,
   IgrCombo,
   IgrComboModule,
-  IgrComponentBoolValueChangedEventArgs,
   IgrRadio,
   IgrRadioGroup,
   IgrRadioGroupModule,
@@ -26,11 +23,11 @@ import {
   IgrSwitchModule
 } from '@infragistics/igniteui-react';
 import { IgrDatePicker, IgrDatePickerModule } from '@infragistics/igniteui-react-inputs';
+import { useState } from 'react';
 import { useGetCategories } from '../hooks/northwind-hooks';
+import { CategoriesType } from '../models/Northwind/categories-type';
 import createClassTransformer from '../style-utils';
 import styles from './other-inputs.module.css';
-import { useState } from 'react';
-import { CategoriesType } from '../models/Northwind/categories-type';
 
 IgrCalendarModule.register();
 IgrCheckboxModule.register();
@@ -129,7 +126,7 @@ export default function OtherInputs() {
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Slider</p>
           <IgrSlider value={slider} change={(_s, e) => setSlider(e.detail)} className={classes("slider")}></IgrSlider>
-          <p>Select is {select}</p>
+          <p>Slider is {slider}</p>
 
           <IgrRangeSlider lower={range?.lower} upper={range?.upper} change={(_s, e) => setRange(e.detail)} className={classes("slider")}></IgrRangeSlider>
           <p>Range is {range?.lower} - {range?.upper}</p>
