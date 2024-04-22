@@ -89,7 +89,7 @@
   </p>
   <igx-input-group type="border" class="user-input">
     <label igxLabel>With blur not working</label>
-    <input igxInput igxDateTimeEditor [(ngModel)]="date" [ngModelOptions]="{updateOn: 'blur'}" />
+    <input type="text" igxInput igxDateTimeEditor [(ngModel)]="date" [ngModelOptions]="{updateOn: 'blur'}" />
   </igx-input-group>
   <igx-input-group type="border" class="user-input">
     <label igxLabel>No blur</label>
@@ -97,9 +97,27 @@
   </igx-input-group>
   <igx-input-group type="border" class="user-input">
     <label igxLabel>Date</label>
-    <input igxInput igxDateTimeEditor [value]="date ?? ''" (change)="dateInputChange($event)" />
+    <input type="text" igxInput igxDateTimeEditor [value]="date ?? ''" (change)="dateInputChange($event)" />
   </igx-input-group>
   <p>Added just for testing</p>
   <button igxButton (click)="buttonSetDate()">Set date</button>
   {{ date | date:'shortDate' }}
+</div>
+<div class="column-layout group">
+  <p class="text">
+    Textarea
+  </p>
+  <igx-input-group type="border" class="user-input">
+    <textarea></textarea>
+    <input [(ngModel)]="textarea" igxInput [ngModelOptions]="{updateOn: 'blur'}" />
+    <label igxLabel>With blur</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input [(ngModel)]="textarea" igxInput />
+    <label igxLabel>No blur</label>
+  </igx-input-group>
+  <igx-input-group type="border" class="user-input">
+    <input [value]="textarea" igxInput (change)="textareaChange($event)" />
+    <label igxLabel>Password</label>
+  </igx-input-group>
 </div>

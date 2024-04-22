@@ -17,6 +17,7 @@ export class InputGroupComponent {
   public password: string | undefined;
   public phone: string | undefined;
   public date: Date | undefined;
+  public textarea: string | undefined;
 
   textInputChange = (e: Event) => {
     this.textVar = (e.target as HTMLInputElement).value;
@@ -33,6 +34,10 @@ export class InputGroupComponent {
 
   passwordInputChange = (e: Event) => {
     this.password = (e.target as HTMLInputElement).value;
+  }
+
+  textareaChange = (e: Event) => {
+    this.textarea = (e.target as HTMLInputElement).value;
   }
 
   phoneInputChange = (e: Event) => {
