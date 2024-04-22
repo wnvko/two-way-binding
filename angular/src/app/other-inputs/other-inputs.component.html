@@ -4,7 +4,7 @@
   </p>
   <igx-checkbox [(ngModel)]="checked" [ngModelOptions]="{updateOn: 'blur'}">With blur</igx-checkbox>
   <igx-checkbox [(ngModel)]="checked">No blur</igx-checkbox>
-  <igx-checkbox [value]="checked" (change)="checkboxChange($event)">Not update on property update</igx-checkbox>
+  <igx-checkbox [checked]="checked" (change)="checkboxChange($event)">Not update on property update</igx-checkbox>
   <p>Checked is {{checked}}</p>
 </div>
 <div class="column-layout group">
@@ -140,7 +140,7 @@
   </p>
   <igx-switch [(ngModel)]="checked" [ngModelOptions]="{updateOn: 'blur'}">With blur</igx-switch>
   <igx-switch [(ngModel)]="checked">No blur</igx-switch>
-  <igx-switch [value]="checked" (change)="switchChange($event)">Not update on property update</igx-switch>
+  <igx-switch [checked]="checked" (change)="switchChange($event)">Not update on property update</igx-switch>
 </div>
 <div class="column-layout group">
   <p class="text">
