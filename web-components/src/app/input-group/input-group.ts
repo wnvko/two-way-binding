@@ -1,8 +1,8 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { defineComponents, IgcDateTimeInputComponent, IgcInputComponent } from 'igniteui-webcomponents';
+import { defineComponents, IgcDateTimeInputComponent, IgcInputComponent, IgcTextareaComponent } from 'igniteui-webcomponents';
 
-defineComponents(IgcInputComponent, IgcDateTimeInputComponent);
+defineComponents(IgcInputComponent, IgcDateTimeInputComponent, IgcTextareaComponent);
 
 @customElement('app-input-group')
 export default class InputGroup extends LitElement {
@@ -48,6 +48,9 @@ export default class InputGroup extends LitElement {
   @state()
   private date!: Date | null;
 
+  @state()
+  private textarea: string | undefined;
+
   render() {
     return html`
       <link rel='stylesheet' href='../../ig-theme.css'>
@@ -80,6 +83,11 @@ export default class InputGroup extends LitElement {
         <p class="typography__body-1 text">Type Date</p>
         <igc-date-time-input .value="${this.date}" @igcChange="${(e: CustomEvent<Date | null>) => this.date = e.detail}" class="date-time-input"></igc-date-time-input>
         <p>Date is ${this.date?.toDateString()}</p>
+      </div>
+      <div class="column-layout group">
+        <p class="typography__body-1 text">Textarea</p>
+        <igc-textarea value="${this.textarea ?? ''}" @igcChange="${(e: CustomEvent<string>) => this.textarea = e.detail}"></igc-textarea>
+        <p>Textarea is ${this.textarea}</p>
       </div>
     `;
   }
