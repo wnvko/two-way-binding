@@ -30,6 +30,7 @@ void RegisterIgniteUI(IServiceCollection services)
         typeof(IgbSliderModule),
         typeof(IgbRangeSliderModule),
         typeof(IgbSwitchModule),
+        typeof(IgbTextareaModule),
         typeof(IgbCalendarModule)
     );
 }

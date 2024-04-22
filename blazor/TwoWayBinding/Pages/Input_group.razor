@@ -48,6 +48,13 @@
         <IgbDatePicker Value="_date" Label="Date" ValueChanged="@(e => _date = e)" input_group-scope></IgbDatePicker>
         <p>Date now id @_date.ToShortDateString()</p>
     </div>
+    <div class="column-layout group">
+        <p class="typography__body-1 text">
+            Type Phone
+        </p>
+        <IgbTextarea @bind-Value="@_textArea" Label="Text area" Placeholder="Put some text here"></IgbTextarea>
+        <IgbTextarea Value="@_textArea" Change="@(e => _textArea = e.Detail)" Label="Text area" Placeholder="Put some text here"></IgbTextarea>
+    </div>
 </div>
 
 @code {
@@ -57,4 +64,5 @@
     private string _password;
     private string _phone;
     private DateTime _date;
+    private string _textArea;
 }
