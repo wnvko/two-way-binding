@@ -1,10 +1,11 @@
-import { IgrDateTimeInput, IgrDateTimeInputModule, IgrInput, IgrInputModule } from '@infragistics/igniteui-react';
+import { IgrDateTimeInput, IgrDateTimeInputModule, IgrInput, IgrInputModule, IgrTextarea, IgrTextareaModule } from '@infragistics/igniteui-react';
 import { useState } from 'react';
 import createClassTransformer from '../style-utils';
 import styles from './input-group.module.css';
 
 IgrDateTimeInputModule.register();
 IgrInputModule.register();
+IgrTextareaModule.register();
 
 export default function InputGroup() {
   const classes = createClassTransformer(styles);
@@ -14,6 +15,7 @@ export default function InputGroup() {
   const [password, setPassword] = useState<string | undefined>()
   const [phone, setPhone] = useState<string | undefined>()
   const [date, setDate] = useState<Date | undefined>()
+  const [textarea, setTextarea] = useState<string | undefined>()
 
   return (
     <>
@@ -52,6 +54,11 @@ export default function InputGroup() {
           <p className={classes("typography__body-1 text")}>Type Date</p>
           <IgrDateTimeInput value={date} change={(_s, e) => setDate(e.detail)} label="Date"></IgrDateTimeInput>
           <p>Date is {date?.toDateString()}</p>
+        </div>
+        <div className={classes("column-layout group")}>
+          <p className={classes("typography__body-1 text")}>Type Phone</p>
+          <IgrTextarea value={textarea} change={(_s, e) => setTextarea(e.detail)} label="Textarea"></IgrTextarea>
+          <p>Textarea is {textarea}</p>
         </div>
       </div>
     </>
