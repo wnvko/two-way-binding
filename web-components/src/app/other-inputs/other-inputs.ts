@@ -56,13 +56,13 @@ export default class OtherInputs extends LitElement {
   private northwindCategories: CategoriesType[] = [];
 
   @state()
-  private checked: boolean | undefined;
+  private checked?: boolean;
 
   @state()
-  private categoryId: number | undefined;
+  private categoryId?: number;
 
   @state()
-  private category: CategoriesType | undefined;
+  private category?: CategoriesType;
 
   @state()
   private categoryIds: number[] = [];
@@ -71,29 +71,29 @@ export default class OtherInputs extends LitElement {
   private categories: CategoriesType[] = [];
 
   @state()
-  private radio: number | undefined;
+  private radio?: number;
 
   @state()
-  private rating: number | undefined;
+  private rating?: number;
 
   @state()
-  private select: number | undefined;
+  private select?: number;
 
   @state()
-  private slider: number | undefined;
+  private slider?: number;
 
   @state()
-  private range: IgcRangeSliderValue | undefined;
+  private range?: IgcRangeSliderValue;
 
   @state()
-  private date!: Date | null;
+  private date?: Date;
 
   render() {
     return html`
       <link rel='stylesheet' href='../../ig-theme.css'>
       <div class="column-layout group">
         <p class="typography__body-1 text">Check box</p>
-        <igc-checkbox .checked=${this.checked ?? false} @igcChange="${(e: CustomEvent<boolean>) => this.checked = e.detail}">Label</igc-checkbox>
+        <igc-checkbox .checked=${this.checked!} @igcChange="${(e: CustomEvent<boolean>) => this.checked = e.detail}">Label</igc-checkbox>
         <p>Checked is ${this.checked}</p>
       </div>
       <div class="column-layout group">
@@ -120,9 +120,9 @@ export default class OtherInputs extends LitElement {
       <div class="column-layout group">
         <p class="typography__body-1 text">Radio group</p>
         <igc-radio-group>
-          <igc-radio name="radio" value="1" @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 1 : undefined}>Label</igc-radio>
-          <igc-radio name="radio" value="2" @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 2 : undefined}>Label</igc-radio>
-          <igc-radio name="radio" value="3" @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 3 : undefined}>Label</igc-radio>
+          <igc-radio name="radio" value="1" .checked=${this.radio === 1} @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 1 : undefined}>Label</igc-radio>
+          <igc-radio name="radio" value="2" .checked=${this.radio === 2} @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 2 : undefined}>Label</igc-radio>
+          <igc-radio name="radio" value="3" .checked=${this.radio === 3} @igcChange=${(e: CustomEvent<boolean>) => e.detail ? this.radio = 3 : undefined}>Label</igc-radio>
         </igc-radio-group>
         <p>Radio is ${this.radio}</p>
       </div>
@@ -144,7 +144,7 @@ export default class OtherInputs extends LitElement {
         <p class="typography__body-1 text">
           Slider
         </p>
-        <igc-slider .value="${this.slider ?? 0}" @igcChange="${(e: CustomEvent<number>) => this.slider = e.detail}" class="slider"></igc-slider>
+        <igc-slider .value="${this.slider!}" @igcChange="${(e: CustomEvent<number>) => this.slider = e.detail}" class="slider"></igc-slider>
         <p>Slider is ${this.slider}</p>
         <igc-range-slider .lower=${this.range?.lower ?? 0} .upper=${this.range?.upper ?? 0} @igcChange=${(e: CustomEvent<IgcRangeSliderValue>) => this.range = e.detail} class="slider"></igc-range-slider>
         <p>Range is ${this.range?.lower} - ${this.range?.upper}</p>
@@ -155,7 +155,7 @@ export default class OtherInputs extends LitElement {
       </div>
       <div class="column-layout group">
         <p class="typography__body-1 text">Calendar</p>
-          <igc-calendar .value="${this.date}" @igcChange="${(e: CustomEvent<Date | null>) => this.date = e.detail}"></igc-calendar>
+          <igc-calendar .value="${this.date}" @igcChange="${(e: CustomEvent<Date | undefined>) => this.date = e.detail}"></igc-calendar>
           <p>Date is ${this.date?.toDateString()}</p>
       </div>
     `;
