@@ -54,8 +54,9 @@ export default function OtherInputs() {
   const [radio, setRadio] = useState<string | undefined>();
   const [rating, setRating] = useState<number | undefined>();
   const [select, setSelect] = useState<number | undefined>();
+  // const [selectNoValueKey, setSelectNoValueKey] = useState<CategoriesType | undefined>();
   const [slider, setSlider] = useState<number | undefined>();
-  const [range, setRange] = useState<IgrRangeSliderValue | undefined>();
+  const [range, setRange] = useState<IgrRangeSliderValue | undefined>({ lower: 10, upper: 20 } as IgrRangeSliderValue);
 
   return (
     <>
@@ -77,9 +78,9 @@ export default function OtherInputs() {
 
           <IgrCombo value={categoryIds} change={(_s, e) => setCategoryIds(e.detail.newValue)}
             data={northwindCategories} label="Multi with value key" valueVey="categoryID" displayKey="description" ></IgrCombo>
-          {categoryIds.map(item =>
+          {/* {categoryIds.map(item =>
             <p>Category Id - {item}</p>
-          )}
+          )} */}
 
           <IgrCombo value={categories} change={(_s, e) => setCategories(e.detail.newValue)}
             data={northwindCategories} label="Multi no value key" displayKey="description" ></IgrCombo>
@@ -95,13 +96,13 @@ export default function OtherInputs() {
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Radio group</p>
           <IgrRadioGroup>
-            <IgrRadio name="radio" change={(s, e) => e.detail ? setRadio(s.value) : undefined } value="1" key={uuid()}>
+            <IgrRadio name="radio" change={(s, e) => e.detail ? setRadio(s.value) : undefined} value="1" key={uuid()}>
               <span key={uuid()}>Label</span>
             </IgrRadio>
-            <IgrRadio name="radio" change={(s, e) => e.detail ? setRadio(s.value) : undefined } value="2" key={uuid()}>
+            <IgrRadio name="radio" change={(s, e) => e.detail ? setRadio(s.value) : undefined} value="2" key={uuid()}>
               <span key={uuid()}>Label</span>
             </IgrRadio>
-            <IgrRadio name="radio" change={(s, e) => e.detail ? setRadio(s.value) : undefined } value="3" key={uuid()}>
+            <IgrRadio name="radio" change={(s, e) => e.detail ? setRadio(s.value) : undefined} value="3" key={uuid()}>
               <span key={uuid()}>Label</span>
             </IgrRadio>
           </IgrRadioGroup>
@@ -122,6 +123,15 @@ export default function OtherInputs() {
             ))}
           </IgrSelect>
           <p>Select is {select}</p>
+          {/* <p className={classes("typography__body-1 text")}>Select no value key</p>
+          <IgrSelect value={selectNoValueKey} change={(_s, e) => setSelectNoValueKey(e.detail.value)}>
+            {northwindCategories.map((item) => (
+              <IgrSelectItem key={uuid()}>
+                <span key={uuid()}>{item.name}</span>
+              </IgrSelectItem>
+            ))}
+          </IgrSelect>
+          <p>Select is {selectNoValueKey?.name}</p> */}
         </div>
         <div className={classes("column-layout group")}>
           <p className={classes("typography__body-1 text")}>Slider</p>
