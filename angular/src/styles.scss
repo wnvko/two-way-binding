@@ -3,6 +3,12 @@
 // Standard CSS normalize, comment out if not required or using a different module
 @use "minireset.css/minireset";
 @use "@infragistics/igniteui-angular/theming" as *;
+// Specifies large size for all components to match the previous defaults
+// This may not be needed for your project. Please consult https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/update-guide for more details.
+:root {
+    --ig-size: var(--ig-size-large);
+}
+
 
 @include core();
 @include typography();
