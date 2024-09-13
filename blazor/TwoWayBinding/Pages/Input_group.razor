@@ -5,6 +5,7 @@
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Type Text
+        <p>Text is @_text</p>
         </p>
         <IgbInput @bind-Value="@_text" Label="Text" input_group-scope></IgbInput>
         <IgbInput Value="@_text" Label="Text" Change="@(e => _text = e.Detail)" input_group-scope></IgbInput>
@@ -13,15 +14,15 @@
         <p class="typography__body-1 text">
             Type Numeric
         </p>
-        <p>@@bind does not work when input type in Number </p>
         <p>Number is @_number</p>
         @* <IgbInput DisplayType="InputType.Number" @bind-Value="@_number" Label="Numeric" input_group-scope></IgbInput> *@
-        <IgbInput DisplayType="InputType.Number" Value="@_number.ToString()" Label="Numeric" Change="@(e => _number = double.Parse(e.Detail))" input_group-scope></IgbInput>
+        <IgbInput DisplayType="InputType.Number" Value="@_number.ToString()" Label="Numeric" Change="@(e => _number = e.Detail == "" ? null : double.Parse(e.Detail))" input_group-scope></IgbInput>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
             Type Email
         </p>
+        <p>Email is @_email</p>
         <IgbInput DisplayType="InputType.Email" @bind-Value="@_email" Label="Email" input_group-scope></IgbInput>
         <IgbInput DisplayType="InputType.Email" Value="@_email" Label="Email" Change="@(e => _email = e.Detail)" input_group-scope></IgbInput>
     </div>
@@ -29,6 +30,7 @@
         <p class="typography__body-1 text">
             Type Password
         </p>
+        <p>Password is @_password</p>
         <IgbInput DisplayType="InputType.Password" @bind-Value="@_password" Label="Password" input_group-scope></IgbInput>
         <IgbInput DisplayType="InputType.Password" Value="@_password" Label="Password" Change="@(e => _password = e.Detail)" input_group-scope></IgbInput>
     </div>
@@ -36,6 +38,7 @@
         <p class="typography__body-1 text">
             Type Phone
         </p>
+        <p>Phone is @_phone</p>
         <IgbInput DisplayType="InputType.Tel" @bind-Value="@_phone" Label="Phone" input_group-scope></IgbInput>
         <IgbInput DisplayType="InputType.Tel" Value="@_phone" Label="Phone" Change="@(e => _phone = e.Detail)" input_group-scope></IgbInput>
     </div>
@@ -44,14 +47,16 @@
             Type Date
         </p>
         <p>Not able to delete date from related variable</p>
+        <p>Date is @_date</p>
         <IgbDatePicker @bind-Value="_date" Label="Date" input_group-scope></IgbDatePicker>
         <IgbDatePicker Value="_date" Label="Date" ValueChanged="@(e => _date = e)" input_group-scope></IgbDatePicker>
         <p>Date now id @_date.ToShortDateString()</p>
     </div>
     <div class="column-layout group">
         <p class="typography__body-1 text">
-            Type Phone
+            Type Text Area
         </p>
+        <p>Text area is @_textArea</p>
         <IgbTextarea @bind-Value="@_textArea" Label="Text area" Placeholder="Put some text here"></IgbTextarea>
         <IgbTextarea Value="@_textArea" Change="@(e => _textArea = e.Detail)" Label="Text area" Placeholder="Put some text here"></IgbTextarea>
     </div>
