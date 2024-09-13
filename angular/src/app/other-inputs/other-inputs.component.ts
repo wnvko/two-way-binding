@@ -57,10 +57,10 @@ export class OtherInputsComponent implements OnInit, OnDestroy {
   public checked: boolean | undefined;
   public categoryId: number | undefined;
   public categoriesIds: number[] = [];
-  public date!: Date;
+  public date?: Date;
   public radioGroupValue: string | undefined;
   public ratingValue: number | undefined;
-  public sliderValue!: number;
+  public sliderValue?: number;
   public rangeSliderValue!: IRangeSliderValue;
 
   checkboxChange = (e: IChangeCheckboxEventArgs) => this.checked = e.checked;

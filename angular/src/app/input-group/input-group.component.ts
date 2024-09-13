@@ -11,13 +11,13 @@ import { IGX_BUTTON_GROUP_DIRECTIVES, IGX_INPUT_GROUP_DIRECTIVES, IgxDateTimeEdi
   styleUrls: ['./input-group.component.scss']
 })
 export class InputGroupComponent {
-  public textVar: string | undefined;
-  public numberVar: number | undefined;
-  public email: string | undefined;
-  public password: string | undefined;
-  public phone: string | undefined;
-  public date: Date | undefined;
-  public textarea: string | undefined;
+  public textVar?: string;
+  public numberVar?: number;
+  public email?: string;
+  public password?: string;
+  public phone?: string;
+  public date?: Date;
+  public textarea?: string;
 
   textInputChange = (e: Event) => {
     this.textVar = (e.target as HTMLInputElement).value;

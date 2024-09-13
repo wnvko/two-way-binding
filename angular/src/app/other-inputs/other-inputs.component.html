@@ -127,7 +127,7 @@
   <p>Update on blur does not work on slider</p>
   <igx-slider [(ngModel)]="sliderValue" class="slider" [ngModelOptions]="{updateOn: 'blur'}"></igx-slider>
   <igx-slider [(ngModel)]="sliderValue" class="slider"></igx-slider>
-  <igx-slider [value]="sliderValue" (valueChange)="sliderValueChange($event)" class="slider"></igx-slider>
+  <igx-slider [value]="sliderValue!" (valueChange)="sliderValueChange($event)" class="slider"></igx-slider>
   <igx-slider type="range" [(ngModel)]="rangeSliderValue" class="slider"
     [ngModelOptions]="{updateOn: 'blur'}"></igx-slider>
   <igx-slider type="range" [(ngModel)]="rangeSliderValue" class="slider"></igx-slider>
@@ -155,6 +155,6 @@
       <igx-calendar [(ngModel)]="date" [ngModelOptions]="{updateOn: 'blur'}"></igx-calendar>
       <p>With blur - does not update date</p>
     </div>
-    <igx-calendar [value]="date" (selected)="calendarViewDateChange($event)"></igx-calendar>
+    <igx-calendar [value]="date!" (selected)="calendarViewDateChange($event)"></igx-calendar>
   </div>
 </div>
